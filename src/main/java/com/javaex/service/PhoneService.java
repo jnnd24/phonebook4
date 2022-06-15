@@ -33,6 +33,7 @@ public class PhoneService {
 	
 	//전화번호 등록
 	public int personInsert(PersonVo personVo) {
+		System.out.println("PhoneService > personInsert");
 		
 		int count = phoneDao.personInsert(personVo);
 		

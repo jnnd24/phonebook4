@@ -6,7 +6,7 @@
 	<!-- 쿼리문 작성 -->
 	<select id="selectList" resultType="com.javaex.vo.PersonVo">
 		<![CDATA[
-			select  person_id
+			select  person_id as personId
 			        ,name
 			        ,hp
 			        ,company
@@ -16,9 +16,24 @@
 	</select>
 	
 	
+	<insert id="personInsert" parameterType="com.javaex.vo.PersonVo">  
+	    <![CDATA[
+			insert into person
+			values (seq_person_id.nextval, #{name}, #{hp}, #{company})
+	    ]]>
+	</insert>
+
 	
+	<delete id="personDelete" parameterType="com.javaex.vo.PersonVo">
+		<![CDATA[
+			delete from person
+			where person_id = #{personId}
+		]]>
+	</delete>
 	
+	<select id="getPerson">
 	
+	</select>
 	
 	
 	
