@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
+
 <mapper namespace="phonebook">
+
+
+
+<resultMap id="resultMapPersonVo" type="com.javaex.vo.PersonVo">
+    <result column="person_id" property="personId" />
+	<result column="name" property="name"/>
+	<result column="hp" property="hp"/>
+	<result column="company" property="company"/>
+</resultMap>
+
+
+
 	
 	<!-- 쿼리문 작성 -->
-	<select id="selectList" resultType="com.javaex.vo.PersonVo">
+	<select id="selectList" resultMap="resultMapPersonVo">
 		<![CDATA[
-			select  person_id as personId
+			select  person_id
 			        ,name
 			        ,hp
 			        ,company
@@ -31,10 +45,26 @@
 		]]>
 	</delete>
 	
-	<select id="getPerson">
-	
+	<select id="getPerson" parameterType="int" resultType="com.javaex.vo.PersonVo">
+		<![CDATA[
+			select  person_id personId
+			        ,name
+			        ,hp
+			        ,company
+			from person
+			where person_id = #{personId}
+		]]>
 	</select>
 	
+	<update id="personUpdate" parameterType="int">
+		<![CDATA[
+			update person
+			set name =  #{name}
+			    ,hp = #{hp}
+			    ,company = #{company}
+			where person_id = #{personId}
+		]]>
+	</update>
 	
 	
 	
