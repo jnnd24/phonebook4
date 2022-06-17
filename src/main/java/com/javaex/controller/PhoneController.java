@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,7 +63,9 @@ public class PhoneController {
 		System.out.println(personVo);
 
 		//service로 보내서 insert하기
-		phoneService.personInsert(personVo);
+		//phoneService.personInsert(personVo);
+		//문법수업용 Map이용
+		phoneService.personInsert2();
 	
 		//리다이렉트
 		return "redirect:/list";
@@ -96,6 +99,20 @@ public class PhoneController {
 		return "updateForm";
 	}
 	
+	//수정폼 2 Map으로 데이터 가져오기
+		@RequestMapping(value= "updateForm2", method= {RequestMethod.GET, RequestMethod.POST})
+		public String updateForm2(Model model, @RequestParam("no")int no) {
+			System.out.println("updateForm2 진입");
+			
+			
+			//불러온 정보 Vo에 담기
+			Map<String, Object> pMap = phoneService.getPerson2(no);
+			
+			//attribute에 담아서 보내기
+			model.addAttribute("pMap", pMap);
+			
+			return "updateForm2";
+		}
 	
 	//수정
 	@RequestMapping(value= "update", method= {RequestMethod.GET, RequestMethod.POST})

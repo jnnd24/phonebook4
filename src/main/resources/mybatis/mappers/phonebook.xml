@@ -36,6 +36,14 @@
 			values (seq_person_id.nextval, #{name}, #{hp}, #{company})
 	    ]]>
 	</insert>
+	
+	<!-- Map으로 넣기 -->
+	<insert id="personInsert2" parameterType="map">
+		<![CDATA[
+			insert into person
+			values (seq_person_id.nextval, #{name}, #{hp}, #{company})
+		]]>
+	</insert>
 
 	
 	<delete id="personDelete" parameterType="com.javaex.vo.PersonVo">
@@ -52,7 +60,18 @@
 			        ,hp
 			        ,company
 			from person
-			where person_id = #{personId}
+			where person_id = #{no}
+		]]>
+	</select>
+	
+	<select id="getPerson2" parameterType="int" resultType="map">
+		<![CDATA[
+			select  person_id personId
+			        ,name
+			        ,hp
+			        ,company
+			from person
+			where person_id = #{no}
 		]]>
 	</select>
 	
